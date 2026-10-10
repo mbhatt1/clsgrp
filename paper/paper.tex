@@ -12,7 +12,7 @@
 
 \begin{document}
 \title{Regev's Factoring Algorithm over Class Groups:\\ Half the Group Operations, Twice the Cost}
-\author{\IEEEauthorblockN{Manish Bhatt}\IEEEauthorblockA{Code: \url{https://github.com/mbhatt1/clsgrp}}}
+\author{\IEEEauthorblockN{Manish Bhatt}\IEEEauthorblockA{OWASP\\manish.bhatt13212@gmail.com}}
 \maketitle
 
 \begin{abstract}
@@ -123,6 +123,9 @@ A uniform point of $L^*/\Z^d$ is a uniformly random character of $\Cl(D)$ evalua
 \centering
 \input{tables/sim.tex}
 \end{table}
+
+\subsection{Reproducibility}
+All code, the per-experiment results, and the LaTeX source are at \url{https://github.com/mbhatt1/clsgrp}. A single command, \texttt{./reproduce.sh}, reruns every experiment in this paper from fixed seeds, regenerates Tables~\ref{tab:classical}--\ref{tab:cost} and both figures from the results, and builds this PDF; the two slowest classical runs are shipped as recorded results and rerun with \texttt{--full}. Requirements are Python with \texttt{sympy} and \texttt{matplotlib}, PARI/GP, and a TeX distribution.
 
 \section{Cost of the Group Operation}\label{sec:cost}
 \subsection{Squaring a form}
