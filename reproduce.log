@@ -73,3 +73,29 @@ clean   : class step  125.7  int step  16.6  per-step 7.58x  total 4.21x  R=26.4
 N=2854279=1889*1511: (1/N)∫S = 1008 (integer True), h = 1008, factor 1511
 N=2712751=1867*1453: (1/N)∫S = 930 (integer True), h = 930, factor 1453
 N=2855011=1723*1657: (1/N)∫S = 418 (integer True), h = 418, factor 1657
+N=2079283=1433*1451: (1/N)∫S = 276 (integer True), h = 276, factor 1433
+-> results/integral_demo.json
+
+== scripts/geodesic_demo.py 3
+N=2313289679=38839*59561 period 2402: factor (38839)
+N=2295299939=36097*63587 period 15010: factor (36097)
+N=1867973803=35573*52511 period 19698: factor (35573)
+N=2244802361=38977*57593 period 17433: odd period
+N=3053337619=58171*52489 period 32306: trivial
+N=3171247511=54623*58057 period 27940: trivial
+N=2257629047=37619*60013 period 14334: factor (37619)
+N=1725373271=39703*43457 period 12412: trivial
+-> results/geodesic_demo.json
+
+== scripts/make_tables.py
+-> paper/tables/classical.tex
+-> paper/tables/sim.tex
+-> paper/tables/cost.tex
+
+== scripts/make_figs.py
+-> paper/fig1_scaling.png c=0.94
+-> paper/fig_hero.png
+
+== building paper/paper.pdf
+paper/paper.pdf: Pages:           6
+exit 0
