@@ -1,0 +1,13 @@
+{
+ "nprime": 2048,
+ "trials": 4,
+ "ok": 4,
+ "steps_avg": 654.75,
+ "steps_max": 769,
+ "budget": 892,
+ "quotient_bits": 6,
+ "fwd_toffoli": 68883598.0,
+ "fwd_units": 16.423129558563232,
+ "clean_units": 32.846259117126465,
+ "history_qubits": 9185.0
+}

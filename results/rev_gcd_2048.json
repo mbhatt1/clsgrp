@@ -1,0 +1,11 @@
+{
+ "nprime": 2048,
+ "trials": 3,
+ "ok": 3,
+ "K": 5907,
+ "fwd_toffoli": 96955687.0,
+ "fwd_units": 23.116037130355835,
+ "clean_units": 46.23207426071167,
+ "history_qubits": 11814.0,
+ "divstep_toffoli_per_n": 8.014498737594169
+}

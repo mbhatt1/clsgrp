@@ -1,0 +1,28 @@
+"""Assemble the per-step cost comparison (Table III, Fig. 1) from the measured components.
+usage: python3 scripts/compare.py <bits of N>"""
+import sys
+from _common import *
+
+n = int(sys.argv[1]); h = n // 2; T0 = h * h
+nud = load(f"nudupl_{n}"); inv = load(f"rev_gcd_{h}"); par = load(f"rev_partial_{h}")
+sigma = 300; d = int(round(n ** 0.5)); c = 8
+small_arith = (2 * h * sigma * 2 + 2 * (h + sigma) ** 2 + 3 * h * (h + sigma) + 2 * sigma * sigma * 2) / T0
+small_euc = 8 * 1.15 * h * (2.88 * sigma) / T0 + 1.0
+int_step = (2 * n * n + n * n) / T0 + (2 * n * sigma + n * n) / T0
+arith = nud["arith_toffoli_units"]
+comp = {
+ "garbage": dict(inverse=inv["fwd_units"], partial=par["fwd_units"], arith=arith, small=small_arith + small_euc),
+ "clean":   dict(inverse=inv["clean_units"], partial=par["clean_units"], arith=1.5 * arith, small=1.5 * small_arith + 2 * small_euc),
+}
+tot_class = (d + 4) * (h / d + c); tot_int = (d + 4) * (n / d + c); step_ratio = tot_class / tot_int
+out = dict(n=n, nprime=h, d=d, int_step=int_step, step_ratio=step_ratio, tot_class_steps=tot_class, tot_int_steps=tot_int,
+           small_arith=small_arith, small_euc=small_euc)
+for k, v in comp.items():
+    cls = sum(v.values()); v = dict(v, total=cls, per_step_ratio=cls / int_step, total_ratio=step_ratio * cls / int_step,
+                                   R=(v["inverse"] + v["partial"]) / 1.5 / 2); out[k] = v
+    print(f"{k:8s}: class step {cls:6.1f}  int step {int_step:5.1f}  per-step {cls / int_step:.2f}x  total {step_ratio * cls / int_step:.2f}x  R={v['R']:.1f}")
+# hero-figure split: 'partial' segment includes the small-form Euclid, 'arith' includes the small-form products
+for k in ("garbage", "clean"):
+    f = 1.0 if k == "garbage" else 2.0; g = 1.0 if k == "garbage" else 1.5
+    out[k]["fig_partial"] = out[k]["partial"] + f * small_euc; out[k]["fig_arith"] = out[k]["arith"] + g * small_arith
+save(f"cost_{n}", out)

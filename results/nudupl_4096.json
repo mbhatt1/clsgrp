@@ -1,0 +1,13 @@
+{
+ "n": 4096,
+ "nprime": 2048,
+ "trials": 12,
+ "ok": 12,
+ "skipped_gcd_gt1": 0,
+ "mul_area_M": 7.401600778102875,
+ "full_xgcd_area_M": 0.9974798560142517,
+ "partial_euclid_area_M": 0.49741969505945843,
+ "final_reduction_steps": 1.8333333333333333,
+ "arith_toffoli_units": 17.80320155620575,
+ "time": 44.439129114151
+}
