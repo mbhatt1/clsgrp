@@ -1,11 +1,21 @@
 """Assemble the per-step cost comparison (Table III, Fig. 1) from the measured components.
 usage: python3 scripts/compare.py <bits of N>"""
-import sys
+import sys, math, random
 from _common import *
+from clsgrp.forms import random_semiprime, first_prime_forms
 
 n = int(sys.argv[1]); h = n // 2; T0 = h * h
 nud = load(f"nudupl_{n}"); inv = load(f"rev_gcd_{h}"); par = load(f"rev_partial_{h}")
-sigma = 300; d = int(round(n ** 0.5)); c = 8
+d = int(round(n ** 0.5)); c = 8
+# Bits of the subset product prod p_l over the d smallest split primes: a reversible circuit must be
+# sized for the full product (all exponent bits set), so take the worst case over seeded moduli.
+SEEDS = range(8); prods = []; elld = []
+for s_ in SEEDS:
+    _, _, N = random_semiprime(n, random.Random(1000 + s_))
+    ls = [l for l, _ in first_prime_forms(-N, d)]
+    prods.append(sum(math.log2(l) for l in ls)); elld.append(ls[-1])
+sigma = math.ceil(max(prods))
+print(f"subset product: {min(prods):.0f}-{max(prods):.0f} bits (sigma = {sigma}), l_d in {min(elld)}-{max(elld)}")
 small_arith = (2 * h * sigma * 2 + 2 * (h + sigma) ** 2 + 3 * h * (h + sigma) + 2 * sigma * sigma * 2) / T0
 small_euc = 8 * 1.15 * h * (2.88 * sigma) / T0 + 1.0
 int_step = (2 * n * n + n * n) / T0 + (2 * n * sigma + n * n) / T0
@@ -15,7 +25,8 @@ comp = {
  "clean":   dict(inverse=inv["clean_units"], partial=par["clean_units"], arith=1.5 * arith, small=1.5 * small_arith + 2 * small_euc),
 }
 tot_class = (d + 4) * (h / d + c); tot_int = (d + 4) * (n / d + c); step_ratio = tot_class / tot_int
-out = dict(n=n, nprime=h, d=d, int_step=int_step, step_ratio=step_ratio, tot_class_steps=tot_class, tot_int_steps=tot_int,
+out = dict(n=n, nprime=h, d=d, sigma=sigma, subset_bits_min=min(prods), subset_bits_max=max(prods),
+           ell_d_min=min(elld), ell_d_max=max(elld), int_step=int_step, step_ratio=step_ratio, tot_class_steps=tot_class, tot_int_steps=tot_int,
            small_arith=small_arith, small_euc=small_euc)
 for k, v in comp.items():
     cls = sum(v.values()); v = dict(v, total=cls, per_step_ratio=cls / int_step, total_ratio=step_ratio * cls / int_step,

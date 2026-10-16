@@ -7,7 +7,7 @@ The paper makes a Regev-style quantum factoring algorithm over the class group o
 Q(√−N) explicit, proves the reduction from factoring to the class number, verifies the
 classical post-processing up to 189 bits, simulates the quantum sampler end to end, and
 costs the route at 4096 bits. The verdict is negative: half the sequential group
-operations, 2.3× to 4.2× the gate cost, because squaring a form contains a modular inverse
+operations, 2.4× to 4.4× the gate cost, because squaring a form contains a modular inverse
 modulo quantum data.
 
 ## Reproduce the paper with one command
@@ -41,6 +41,7 @@ same N, the same relations, and the same numbers up to timing.
 | `scripts/rev_gcd.py` | branch-free reversible modular inverse (divsteps), Toffoli-counted and verified → §VI.C |
 | `scripts/rev_partial.py` | reversible partial Euclid with integer cofactors → §VI.C |
 | `scripts/compare.py` | assembles the per-step comparison → Table III, Fig. 1 |
+| `scripts/ambiguous_1mod4.py` | classes of order two for D = −4N when N ≡ 1 (mod 4) → §3.3 |
 | `scripts/integral_demo.py`, `scripts/geodesic_demo.py` | the class number as an integral; the factor at the midpoint of the CF period of √N → §VII |
 | `scripts/make_tables.py`, `scripts/make_figs.py` | `results/*.json` → `paper/tables/*.tex`, `paper/*.png` |
 | `results/` | one JSON per experiment; the two `recorded: true` entries are the slow classical runs |

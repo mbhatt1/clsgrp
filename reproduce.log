@@ -9,15 +9,15 @@ FACTOR: 588136139 * 600867181 = N  ok=True  total 0.1s
 == scripts/classical_factor.py 100 4000 11
 N = 656966079146691827291288614787 (100 bits); factor base 264 split primes up to 4000
 relations: 288 after 140869 trials (0.8s)
-lattice determinant: 671 bits (2.7s)
+lattice determinant: 671 bits (2.6s)
 FACTOR: 701579289266279 * 936410309138053 = N  ok=True  total 3.5s
 -> results/classical_100.json
 
 == scripts/classical_factor.py 130 10000 13
 N = 464893898891592298459835457412942924031 (129 bits); factor base 581 split primes up to 10000
 relations: 605 after 865335 trials (7.5s)
-lattice determinant: 1510 bits (76.8s)
-FACTOR: 19753269148572296221 * 23535035917089873611 = N  ok=True  total 84.4s
+lattice determinant: 1510 bits (75.4s)
+FACTOR: 19753269148572296221 * 23535035917089873611 = N  ok=True  total 83.0s
 -> results/classical_129.json
 
 == scripts/oracle_factor.py 100 42
@@ -33,7 +33,7 @@ det = 125835094 (= h: True); factor 591400507
 -> results/sim_59_eta22.json
 
 == scripts/sim_regev.py 100 10 5
-N = 570387332272140837959916992239 (99 bits); Cl = [410510827975890], h = 410510827975890 (2.6s)
+N = 570387332272140837959916992239 (99 bits); Cl = [410510827975890], h = 410510827975890 (2.7s)
 d=10, m=14 runs, B=8 exponent bits, precision 48 bits, noise 2^-24
 short vectors 10, verified relations 10
 det = 410510827975890 (= h: True); factor 618191900381929
@@ -47,7 +47,7 @@ det = 410510827975890 (= h: True); factor 618191900381929
 -> results/sim_99_eta12.json
 
 == scripts/sim_regev.py 100 10 5 9
-N = 570387332272140837959916992239 (99 bits); Cl = [410510827975890], h = 410510827975890 (2.7s)
+N = 570387332272140837959916992239 (99 bits); Cl = [410510827975890], h = 410510827975890 (2.6s)
 d=10, m=14 runs, B=8 exponent bits, precision 48 bits, noise 2^-9
 short vectors 24, verified relations 1
 -> results/sim_99_eta9.json
@@ -65,9 +65,14 @@ n'=2048: valid 4/4; steps avg 655 max 769 budget 892; forward 16.4 n'^2, clean 3
 -> results/rev_partial_2048.json
 
 == scripts/compare.py 4096
-garbage : class step   69.0  int step  16.6  per-step 4.16x  total 2.31x  R=13.2
-clean   : class step  125.7  int step  16.6  per-step 7.58x  total 4.21x  R=26.4
+subset product: 479-517 bits (sigma = 517), l_d in 587-853
+garbage : class step   73.2  int step  17.0  per-step 4.30x  total 2.39x  R=13.2
+clean   : class step  133.4  int step  17.0  per-step 7.84x  total 4.36x  R=26.4
 -> results/cost_4096.json
+
+== scripts/ambiguous_1mod4.py 2100
+207 moduli N = 1 (mod 4) below 2100: 0 failures
+-> results/ambiguous_1mod4_2100.json
 
 == scripts/integral_demo.py 22 9
 N=2854279=1889*1511: (1/N)∫S = 1008 (integer True), h = 1008, factor 1511
@@ -97,5 +102,4 @@ N=1725373271=39703*43457 period 12412: trivial
 -> paper/fig_hero.png
 
 == building paper/paper.pdf
-paper/paper.pdf: Pages:           6
-exit 0
+paper/paper.pdf: Pages:           13

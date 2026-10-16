@@ -34,6 +34,8 @@ if [ "$MODE" != "--paper" ]; then
   run scripts/rev_gcd.py 2048 3 5
   run scripts/rev_partial.py 2048 4 3
   run scripts/compare.py 4096
+  # Section 3.3: classes of order two for N = 1 (mod 4)
+  run scripts/ambiguous_1mod4.py 2100
   # Section VII side demonstrations
   run scripts/integral_demo.py 22 9
   run scripts/geodesic_demo.py 3
