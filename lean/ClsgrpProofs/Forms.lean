@@ -4,9 +4,8 @@ import Mathlib
 # Lemma 1: ambiguous reduced forms of discriminant `-N` factor `N`
 
 Integer arithmetic only. The classical fact that a reduced form whose class has
-order dividing two is ambiguous is not formalized here (it needs composition and
-the uniqueness of reduced representatives); `ClsgrpProofs.Reduction` takes it
-as an explicit hypothesis.
+order dividing two is ambiguous is proved in `ClsgrpProofs.Equiv`, from the
+uniqueness of reduced representatives.
 -/
 
 namespace Clsgrp

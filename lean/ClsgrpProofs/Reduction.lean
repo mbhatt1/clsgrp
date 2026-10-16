@@ -1,17 +1,22 @@
 import ClsgrpProofs.Forms
+import ClsgrpProofs.Equiv
 import ClsgrpProofs.TwoPart
 
 /-!
 # Theorem 1: factoring from the class number
 
 The class group is modelled abstractly as a finite abelian group `G` together with
-its map to reduced representatives. Three classical facts not in Mathlib are taken as
-hypotheses of `ClassGroupModel`, each cited in the paper:
+its map to reduced representatives. Mathlib has no composition of binary quadratic
+forms, so `ClassGroupModel` records only the defining properties of the form class group:
 
-* every class has a unique reduced representative of discriminant `-N`
-  (`red` injective, values reduced of discriminant `-N`);
+* distinct classes have distinct reduced representatives of discriminant `-N`;
 * the identity class is represented by the principal form;
-* a class of order two has an ambiguous reduced representative [Cohen 1993].
+* the inverse of a class is the class of the opposite form `(a, -b, c)`.
+
+The two classical theorems the reduction rests on are proved, not assumed:
+uniqueness of reduced representatives (`Form.reduced_unique`) and ambiguity of the
+reduced representative of an order-two class (`ClassGroupModel.red_ambiguous`, from
+`Form.ambiguous_of_equiv_opp`).
 
 Genus theory (a unique element of order two) is not needed for the factoring claim:
 any element of order two works. GRH, used in the paper only to sample nearly
@@ -29,9 +34,19 @@ structure ClassGroupModel (N : ℤ) (G : Type*) [CommGroup G] where
   red_reduced : ∀ g, (red g).IsReduced
   red_disc : ∀ g, (red g).disc = -N
   red_one : red 1 = principal N
-  red_ambiguous : ∀ g, orderOf g = 2 → (red g).IsAmbiguous
+  red_inv : ∀ g, (red g⁻¹).PEquiv (red g).opp
 
 variable {G : Type*} [CommGroup G] [Fintype G] {N : ℤ}
+
+omit [Fintype G] in
+/-- The reduced representative of a class of order two is ambiguous. -/
+theorem ClassGroupModel.red_ambiguous (C : ClassGroupModel N G) {g : G}
+    (hg : orderOf g = 2) : (C.red g).IsAmbiguous := by
+  have hinv : g⁻¹ = g := by
+    rw [inv_eq_iff_mul_eq_one, ← sq, ← hg, pow_orderOf_eq_one]
+  have := C.red_inv g
+  rw [hinv] at this
+  exact ambiguous_of_equiv_opp (C.red_reduced g) this
 
 /-- **Theorem 1.** Let `N = p q` be odd and `h = |Cl(-N)| = 2^k m` with `m` odd. For any
 class `g` with `g^m ≠ 1`, some `j < k` makes the reduced form of `(g^m)^(2^j)` ambiguous
@@ -49,7 +64,7 @@ theorem factor_of_classNumber (C : ClassGroupModel N G) {p q : ℕ} (hp : p.Prim
     rw [← C.red_one]; exact fun h => hy1 (C.red_injective h)
   have hNpos : 0 < N := by rw [hN]; exact_mod_cast Nat.mul_pos hp.pos hq.pos
   obtain ⟨hdvd, h1, h2⟩ := factor_spec (C.red_reduced y) (C.red_disc y) hNpos hodd
-    (C.red_ambiguous y hord) hne
+    (C.red_ambiguous hord) hne
   exact ⟨j, hj, eq_prime_factor hp hq (hN ▸ hdvd) h1 (hN ▸ h2)⟩
 
 /-- **Theorem 1, success probability.** If `k ≥ 1`, at least half of all classes `g`

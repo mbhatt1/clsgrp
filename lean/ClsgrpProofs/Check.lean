@@ -11,6 +11,9 @@ example : (⟨2, 1, 2⟩ : Form).factor = 3 := by decide
 -- `N = 35 = 5 · 7`: `(3, 1, 3)` gives `5`.
 example : (⟨3, 1, 3⟩ : Form).disc = -35 ∧ (⟨3, 1, 3⟩ : Form).factor = 5 := by decide
 
+#print axioms Form.reduced_unique
+#print axioms Form.ambiguous_of_equiv_opp
+#print axioms ClassGroupModel.red_ambiguous
 #print axioms Form.factor_spec
 #print axioms Form.eq_prime_factor
 #print axioms Clsgrp.exists_orderOf_eq_two
@@ -34,10 +37,13 @@ def cl15 : ClassGroupModel 15 (Multiplicative (ZMod 2)) where
     split_ifs <;> norm_num
   red_disc := by intro g; unfold red15 principal disc; split_ifs <;> norm_num
   red_one := by simp [red15]
-  red_ambiguous := by
-    intro g hg
-    have : g ≠ 1 := by rintro rfl; simp at hg
-    simp [red15, this, Form.IsAmbiguous]
+  red_inv := by
+    intro g
+    have hg : g⁻¹ = g := by revert g; decide
+    rw [hg]; unfold red15
+    split_ifs
+    · exact ⟨1, -1, 0, 1, by norm_num, by decide⟩
+    · exact ⟨0, -1, 1, 0, by norm_num, by decide⟩
 
 example : ∃ j < 1, (cl15.red ((Multiplicative.ofAdd 1 ^ 1) ^ (2 ^ j))).factor = 3 ∨
     (cl15.red ((Multiplicative.ofAdd 1 ^ 1) ^ (2 ^ j))).factor = 5 :=
