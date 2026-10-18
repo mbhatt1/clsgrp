@@ -28,10 +28,13 @@ tot_class = (d + 4) * (h / d + c); tot_int = (d + 4) * (n / d + c); step_ratio =
 out = dict(n=n, nprime=h, d=d, sigma=sigma, subset_bits_min=min(prods), subset_bits_max=max(prods),
            ell_d_min=min(elld), ell_d_max=max(elld), int_step=int_step, step_ratio=step_ratio, tot_class_steps=tot_class, tot_int_steps=tot_int,
            small_arith=small_arith, small_euc=small_euc)
+# the integer step's products and reductions get the same 1.5x arithmetic uncompute overhead
+ints = {"garbage": int_step, "clean": 1.5 * int_step}
 for k, v in comp.items():
-    cls = sum(v.values()); v = dict(v, total=cls, per_step_ratio=cls / int_step, total_ratio=step_ratio * cls / int_step,
-                                   R=(v["inverse"] + v["partial"]) / 1.5 / 2); out[k] = v
-    print(f"{k:8s}: class step {cls:6.1f}  int step {int_step:5.1f}  per-step {cls / int_step:.2f}x  total {step_ratio * cls / int_step:.2f}x  R={v['R']:.1f}")
+    cls = sum(v.values()); it = ints[k]
+    v = dict(v, total=cls, int=it, per_step_ratio=cls / it, total_ratio=step_ratio * cls / it,
+             R=(v["inverse"] + v["partial"]) / 1.5 / 2); out[k] = v
+    print(f"{k:8s}: class step {cls:6.1f}  int step {it:5.1f}  per-step {cls / it:.2f}x  total {step_ratio * cls / it:.2f}x  R={v['R']:.1f}")
 # hero-figure split: 'partial' segment includes the small-form Euclid, 'arith' includes the small-form products
 for k in ("garbage", "clean"):
     f = 1.0 if k == "garbage" else 2.0; g = 1.0 if k == "garbage" else 1.5

@@ -24,6 +24,6 @@ body = (f"modular inverse (measured) & {g['inverse']:.1f} & {k['inverse']:.1f}\\
         f"NUDUPL products, divisions (measured) & {g['arith']:.1f} & {k['arith']:.1f}\\\\\n"
         f"small-form composition (modelled) & {g['small']:.1f} & {k['small']:.1f}\\\\\n\\midrule\n"
         f"class-group step & {g['total']:.0f} & {k['total']:.0f}\\\\\n"
-        f"integer Regev step (modelled) & {c['int_step']:.1f} & {c['int_step']:.1f}\\\\\n"
+        f"integer Regev step (modelled) & {g['int']:.1f} & {k['int']:.1f}\\\\\n"
         f"total ratio after $\\times{c['step_ratio']:.2f}$ & ${g['total_ratio']:.1f}\\times$ & ${k['total_ratio']:.1f}\\times$\\\\\n")
 w("cost", "\\begin{tabular}{lrr}\n\\toprule\ncomponent & garbage kept & clean \\\\\n\\midrule\n" + body + "\\bottomrule\n\\end{tabular}")

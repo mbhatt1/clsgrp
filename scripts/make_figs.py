@@ -35,24 +35,25 @@ fig.tight_layout(); fig.savefig(os.path.join(OUT, "fig1_scaling.png"), facecolor
 
 # ---- Fig. 1 (hero)
 cst = load("cost_4096"); g, kc = cst["garbage"], cst["clean"]
-rows = [("Integer Regev step", [0, 0, cst["int_step"]]),
+rows = [("Integer, garbage kept", [0, 0, g["int"]]),
+        ("Integer, fully uncomputed", [0, 0, kc["int"]]),
         ("Class group, garbage kept", [g["inverse"], g["fig_partial"], g["fig_arith"]]),
         ("Class group, fully uncomputed", [kc["inverse"], kc["fig_partial"], kc["fig_arith"]])]
 cats = ["Modular inverse (Euclid)", "Partial Euclid", "Multiplications and divisions"]; cols=[BLUE, ORANGE, AQUA]
-fig = plt.figure(figsize=(9.0, 3.4), dpi=220, facecolor=SURF)
+fig = plt.figure(figsize=(9.0, 3.8), dpi=220, facecolor=SURF)
 gs = fig.add_gridspec(1, 2, width_ratios=[2.5, 1], left=0.26, right=0.965, top=0.80, bottom=0.17, wspace=0.42)
 ax = fig.add_subplot(gs[0]); style(ax, "x"); ax.grid(False, axis="y")
-H=0.3; xmax = 150; ax.set_xlim(0, xmax); ax.set_ylim(-0.55, 2.55); fig.canvas.draw()
-bb=ax.get_window_extent(); r_x=4/(bb.width/xmax); aspect=(xmax/bb.width)/(3.1/bb.height)
+H=0.3; xmax = 150; ax.set_xlim(0, xmax); ax.set_ylim(-0.55, 3.55); fig.canvas.draw()
+bb=ax.get_window_extent(); r_x=4/(bb.width/xmax); aspect=(xmax/bb.width)/(4.1/bb.height)
 for i,(name,vals) in enumerate(rows):
-    y=2-i; x=0
+    y=3-i; x=0
     for j,v in enumerate(vals):
         if v<=0: continue
         last=all(vv<=0 for vv in vals[j+1:])
         P = FancyBboxPatch((x,y-H/2),v,H,boxstyle=f"round,pad=0,rounding_size={r_x}",mutation_aspect=aspect,facecolor=cols[j],edgecolor=SURF,linewidth=2,zorder=3) if last else Rectangle((x,y-H/2),v,H,facecolor=cols[j],edgecolor=SURF,linewidth=2,zorder=3)
         ax.add_patch(P); x+=v
     ax.text(x+2.5,y,f"{x:.0f}",va="center",ha="left",fontsize=9,color=INK2)
-ax.set_yticks([0,1,2]); ax.set_yticklabels([r[0] for r in rows][::-1], color=INK2)
+ax.set_yticks([0,1,2,3]); ax.set_yticklabels([r[0] for r in rows][::-1], color=INK2)
 ax.set_xlabel("Toffolis per sequential squaring step, units of n\u2032\u00b2 (n\u2032 = 2048)")
 ax.set_title("(a) One squaring step, 4096-bit modulus", loc="left", fontsize=10, color=INK, pad=8)
 fig.legend([Rectangle((0,0),1,1,facecolor=c) for c in cols], cats, loc="upper left", bbox_to_anchor=(0.26, 0.955), ncol=3, frameon=False, fontsize=8.5, labelcolor=INK2, handlelength=1.2, columnspacing=1.3)
