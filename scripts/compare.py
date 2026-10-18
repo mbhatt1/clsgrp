@@ -1,4 +1,4 @@
-"""Assemble the per-step cost comparison (Table III, Fig. 1) from the measured components.
+"""Assemble the per-step cost comparison (Table 3, Fig. 1) from the measured components.
 usage: python3 scripts/compare.py <bits of N>"""
 import sys, math, random
 from _common import *

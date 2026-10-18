@@ -1,4 +1,4 @@
-"""h(-N) = (1/N) int_0^N S(y) dy with S the running Jacobi-symbol sum; then factor from h. Section VII.B.
+"""h(-N) = (1/N) int_0^N S(y) dy with S the running Jacobi-symbol sum; then factor from h. Side demonstration, not in the paper.
 usage: python3 scripts/integral_demo.py <bits> <seed>"""
 import sys, random, time
 from _common import *

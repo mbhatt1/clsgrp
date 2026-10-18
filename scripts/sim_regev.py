@@ -1,4 +1,4 @@
-"""End-to-end simulation of Regev's algorithm over Cl(-N): Table II.
+"""End-to-end simulation of Regev's algorithm over Cl(-N): Table 2.
 The quantum sampler is simulated by drawing random characters of Cl(-N) (PARI supplies the group
 structure, as Ekera's regevnum needs the factorization for the integer case).
 usage: python3 scripts/sim_regev.py <bits> <d> <seed> [noise exponent eta]"""

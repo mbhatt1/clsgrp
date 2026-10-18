@@ -8,11 +8,11 @@
  "fb_size": 264,
  "relations": 288,
  "trials": 140869,
- "t_collect": 0.8174393177032471,
+ "t_collect": 0.804326057434082,
  "det_bits": 671,
- "t_det": 2.667301893234253,
+ "t_det": 2.600578784942627,
  "factor": 701579289266279,
  "ok": true,
- "total_time": 3.52652907371521,
+ "total_time": 3.4477028846740723,
  "recorded": false
 }

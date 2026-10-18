@@ -1,5 +1,5 @@
 """Reversible partial Euclid on (a, C) with integer cofactors: one full-width division, then
-division steps with a 6-bit quotient budget and a done flag. Section VI.C.
+division steps with a 6-bit quotient budget and a done flag. Section 6.3.
 usage: python3 scripts/rev_partial.py <n' bits> <trials> <seed>"""
 import sys, random
 from math import isqrt

@@ -1,5 +1,5 @@
 """NUDUPL squaring (derived identity f^2 ~ f(ax+Cy,y)/a with partial Euclid on (a,C)), validated
-against composition, with an operation ledger. Section VI.A.
+against composition, with an operation ledger. Section 6.1.
 usage: python3 scripts/nudupl_cost.py <bits of N> <trials> <seed>"""
 import sys, random, time
 from _common import *

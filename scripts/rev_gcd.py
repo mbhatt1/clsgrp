@@ -1,5 +1,5 @@
 """Branch-free reversible modular inverse (Bernstein-Yang divsteps, cofactors mod the odd modulus),
-executed classically with a Toffoli ledger. Section VI.C.
+executed classically with a Toffoli ledger. Section 6.3.
 usage: python3 scripts/rev_gcd.py <n' bits> <trials> <seed>"""
 import sys, random
 from math import ceil, gcd

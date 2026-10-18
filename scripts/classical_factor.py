@@ -1,4 +1,4 @@
-"""Classical class-group factoring (Schnorr-Lenstra / Hafner-McCurley): Table I, Fig. 2.
+"""Classical class-group factoring (Schnorr-Lenstra / Hafner-McCurley): Table 1, Fig. 2.
 usage: python3 scripts/classical_factor.py <bits> <smoothness bound B> <seed>"""
 import sys, random, time
 from _common import *
