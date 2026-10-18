@@ -43,10 +43,12 @@ fi
 
 run scripts/make_tables.py
 run scripts/make_figs.py
-echo; echo "== building paper/paper.pdf"
-( cd paper && latexmk -pdf -interaction=nonstopmode paper.tex > build.log 2>&1 && echo "paper/paper.pdf: $(pdfinfo paper.pdf 2>/dev/null | grep Pages || echo built)" ) || { echo "LaTeX failed; see paper/build.log" >&2; exit 1; }
+# The LNCS paper lives in paper/pqcrypto/ in the repository and in paper/ in the supplementary archive.
 if [ -d paper/pqcrypto ]; then
-  echo; echo "== building paper/pqcrypto/paper.pdf"
   cp paper/tables/*.tex paper/pqcrypto/tables/ && cp paper/fig_hero.png paper/fig1_scaling.png paper/pqcrypto/
-  ( cd paper/pqcrypto && latexmk -pdf -interaction=nonstopmode paper.tex > build.log 2>&1 && echo "paper/pqcrypto/paper.pdf: $(pdfinfo paper.pdf 2>/dev/null | grep Pages || echo built)" ) || { echo "LaTeX failed; see paper/pqcrypto/build.log" >&2; exit 1; }
+  PDIR=paper/pqcrypto
+else
+  PDIR=paper
 fi
+echo; echo "== building $PDIR/paper.pdf"
+( cd "$PDIR" && latexmk -pdf -interaction=nonstopmode paper.tex > build.log 2>&1 && echo "$PDIR/paper.pdf: $(pdfinfo paper.pdf 2>/dev/null | grep Pages || echo built)" ) || { echo "LaTeX failed; see $PDIR/build.log" >&2; exit 1; }

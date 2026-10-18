@@ -18,7 +18,7 @@ pip install -r requirements.txt     # sympy, matplotlib
 ```
 
 This reruns every experiment except the two slow classical runs, regenerates every table
-and figure from `results/*.json`, and builds `paper/paper.pdf`. The 160-bit (15 min) and
+and figure from `results/*.json`, and builds `paper/pqcrypto/paper.pdf`. The 160-bit (15 min) and
 189-bit (7 h) classical runs use the recorded results shipped in `results/` and are marked
 with an asterisk in Table 1; `./reproduce.sh --full` reruns them too. `./reproduce.sh --paper`
 rebuilds tables, figures, and the PDF from whatever is in `results/` without recomputing.
@@ -45,7 +45,7 @@ same N, the same relations, and the same numbers up to timing.
 | `scripts/integral_demo.py`, `scripts/geodesic_demo.py` | side demonstrations, not in the paper: the class number as an integral; the factor at the midpoint of the CF period of √N |
 | `scripts/make_tables.py`, `scripts/make_figs.py` | `results/*.json` → `paper/tables/*.tex`, `paper/*.png` |
 | `results/` | one JSON per experiment; the two `recorded: true` entries are the slow classical runs |
-| `paper/` | `paper.tex`, `refs.bib`, IEEEtran class and style (CTAN, LPPL), generated tables and figures |
+| `paper/` | generated tables and figures; `paper/pqcrypto/` holds the LNCS paper (`paper.tex`, `refs.bib`, LNCS class and style plus aliascnt from CTAN under the LPPL) and `supplementary.zip` |
 
 ## What is measured and what is modelled
 
@@ -66,4 +66,4 @@ contribution is the explicit combination, the simulator, and the cost measuremen
 
 ## License
 
-MIT for the code. `paper/IEEEtran.cls` and `paper/IEEEtran.bst` are from CTAN under the LPPL.
+MIT for the code. `paper/pqcrypto/llncs.cls`, `paper/pqcrypto/splncs04.bst`, and `paper/pqcrypto/aliascnt.sty` are from CTAN under the LPPL.
