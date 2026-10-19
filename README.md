@@ -45,7 +45,7 @@ same N, the same relations, and the same numbers up to timing.
 | `scripts/integral_demo.py`, `scripts/geodesic_demo.py` | side demonstrations, not in the paper: the class number as an integral; the factor at the midpoint of the CF period of √N |
 | `scripts/make_tables.py`, `scripts/make_figs.py` | `results/*.json` → `paper/tables/*.tex`, `paper/*.png` |
 | `results/` | one JSON per experiment; the two `recorded: true` entries are the slow classical runs |
-| `paper/` | generated tables and figures; `paper/pqcrypto/` holds the LNCS paper (`paper.tex`, `refs.bib`, LNCS class and style plus aliascnt from CTAN under the LPPL) and `supplementary.zip` |
+| `paper/` | generated tables and figures; `paper/pqcrypto/` holds the LNCS paper (`paper.tex`, `refs.bib`, LNCS class and style plus aliascnt from CTAN under the LPPL) |
 
 ## What is measured and what is modelled
 
